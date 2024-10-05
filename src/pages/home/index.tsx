@@ -1,6 +1,6 @@
-import { HomeContainer, HomeIntro, SeparatedItem } from "./styles"
+import { CoffeCard, CoffeList, HomeContainer, HomeIntro, SeparatedItem } from "./styles"
 
-import { Coffee, Package, ShoppingCart, Timer } from "phosphor-react"
+import { Coffee, Minus, Package, Plus, ShoppingCart, Timer } from "phosphor-react"
 
 import mainPicture from "/main-picture.svg"
 
@@ -38,7 +38,36 @@ export function Home(){
             <img src={mainPicture} alt="" />
          </HomeIntro>
 
+         <CoffeList>
+            <h1>Nossos cafés</h1>
 
+            <div className="list">
+               <CoffeCard>
+                  <img src="./coffe-expresso.svg" alt="" />
+
+                  <span>TRADICIONAL</span>
+                  
+                  <h1>Expresso Tradicional</h1>
+                  <h2>O tradicional café feito com água quente e grãos moídos</h2>
+
+                  <div className="coffe-infos">
+                     <h3>9,90</h3>
+
+                     <div className="buy-section">
+                        <div className="stepper">
+                           <Minus size={14}/>
+                           <h1>1</h1>
+                           <Plus size={14}/>
+                        </div>
+
+                        <button>
+                           <ShoppingCart weight="fill" size={22}/>
+                        </button>
+                     </div>
+                  </div>
+               </CoffeCard>
+            </div>
+         </CoffeList>
       </HomeContainer>
    )
 }
