@@ -1,5 +1,5 @@
-import { MapPinLine } from "phosphor-react";
-import { CheckoutContainer, FormContainer, FormContent } from "./styles";
+import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from "phosphor-react";
+import { CheckoutContainer, FormContainer, FormContent, PaymentButton, PaymentMethodContainer } from "./styles";
 import { Input } from "./components";
 
 export function Checkout(){
@@ -32,6 +32,31 @@ export function Checkout(){
                   </div>
                </FormContent>
             </FormContainer>
+
+            <PaymentMethodContainer>
+               <div className="form-header">
+                  <CurrencyDollar size={22}/>
+                  <h1>Pagamento</h1>
+                  <span>O pagamento é feito na entrega. Escolha a forma que deseja pagar</span>
+               </div>
+
+               <div className="payment-buttons">
+                  <PaymentButton>
+                     <CreditCard />
+                     <span>Cartão de crédito</span>
+                  </PaymentButton>
+
+                  <PaymentButton>
+                     <Bank />
+                     <span>Cartão de débito</span>
+                  </PaymentButton>
+
+                  <PaymentButton>
+                     <Money />
+                     <span>Dinheiro</span>
+                  </PaymentButton>
+               </div>
+            </PaymentMethodContainer>
          </div>
       </CheckoutContainer>
    )
