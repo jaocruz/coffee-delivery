@@ -99,8 +99,60 @@ export const PaymentMethodContainer = styled(BaseContainer)`
 `
 
 export const CoffeOrderContainer = styled(BaseContainer)`
+   row-gap: 1.5rem;
+
    border-top-right-radius: 2.75rem;
    border-bottom-left-radius: 2.75rem;
+
+   .divider{
+      height: 0;
+      border: 1px solid ${props => props.theme["base-button"]};
+   }
+
+   .coffeInfo{
+      display: grid;
+      row-gap: 0.75rem;
+   }
+
+   .coffeInfo > div{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: ${props => props.theme["base-text"]};
+   }
+
+   .coffeInfo > div span:first-child{
+      font-size: 0.875rem;
+      font-weight: 400;
+   }
+
+   .coffeInfo > div strong{
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: ${props => props.theme["base-subtitle"]};
+   }
+`
+
+export const ConfirmButton = styled.button`
+   border: 0;
+   border-radius: 0.375rem;
+
+   padding: 0.75rem 0.5rem;
+
+   cursor: pointer;
+
+   text-transform: uppercase;
+   font-size: 0.875rem;
+   font-weight: bold;
+
+   transition: background 0.1s ease-in-out;
+
+   color: ${props => props.theme.white};
+   background: ${props => props.theme.yellow};
+
+   &:hover{
+      background: ${props => props.theme["yellow-dark"]};
+   }
 `
 
 export const FormContent = styled.div`
