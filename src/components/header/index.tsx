@@ -15,7 +15,7 @@ export function Header(){
                <span>Porto Alegre, RS</span>
             </LocaleButton>
 
-            <CartButton>
+            <CartButton onClick={() => console.log("Deu certo")}>
                <ShoppingCart weight="fill" size={22}/>
             </CartButton>
          </div>
