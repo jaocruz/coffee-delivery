@@ -62,19 +62,7 @@ export const FormContent = styled.form`
    display: grid;
    gap: 1rem;
 
-   input{
-      outline: 0;
-
-      padding: 0.75rem;
-      border-radius: 0.25rem;
-
-      color: ${props => props.theme["base-label"]};
-      background: ${props => props.theme["base-input"]};
-
-      border: 1px solid ${props => props.theme["base-button"]};
-   }
-
-   input:first-child{
+   div:first-child{
       width: fit-content;
    }
 
