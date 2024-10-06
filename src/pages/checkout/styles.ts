@@ -3,7 +3,22 @@ import styled from "styled-components";
 export const CheckoutContainer = styled.main`
    padding: 0 10rem;
 
-   h1{
+   form{
+      display: grid;
+
+      align-items: start;
+
+      grid-template-areas:
+      "titulo1 titulo2"
+      "entrega pedido";
+
+      grid-template-columns: 1fr 28rem;
+
+      column-gap: 2rem;
+      margin-bottom: 6rem;
+   }
+
+   label{
       margin: 2.5rem 0 1rem;
 
       font-size: 1.125rem;
@@ -13,16 +28,19 @@ export const CheckoutContainer = styled.main`
    }
 
    .finish-order{
+      grid-area: entrega;
+
       display: flex;
       flex-direction: column;
 
       row-gap: 0.75rem;
    }
 `
-export const FormContainer = styled.div`
+
+const BaseContainer = styled.div`
    display: flex;
    flex-direction: column;
-
+   
    gap: 2rem;
    padding: 2.5rem;
 
@@ -43,7 +61,6 @@ export const FormContainer = styled.div`
 
    .form-header > svg{
       grid-area: svg;
-      color: ${props => props.theme["yellow-dark"]};
    }
 
    .form-header > h1{
@@ -65,8 +82,31 @@ export const FormContainer = styled.div`
    }
 `
 
-export const FormContent = styled.form`
-   display: grid;
+export const FormContainer = styled(BaseContainer)`
+   svg{ color: ${props => props.theme["yellow-dark"]};}
+`
+
+export const PaymentMethodContainer = styled(BaseContainer)`
+   svg{
+      color: ${props => props.theme["purple-dark"]};
+   }
+
+   .payment-buttons{
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      column-gap: 0.75rem;
+   }
+`
+
+export const CoffeOrderContainer = styled(BaseContainer)`
+   border-top-right-radius: 2.75rem;
+   border-bottom-left-radius: 2.75rem;
+`
+
+export const FormContent = styled.div`
+   display: flex;
+   flex-direction: column;
+   
    gap: 1rem;
 
    div:first-child{
@@ -83,58 +123,6 @@ export const FormContent = styled.form`
       display: grid;
       column-gap: 0.75rem;
       grid-template-columns: auto 1fr 3.75rem;
-   }
-`
-
-export const PaymentMethodContainer = styled.div`
-   padding: 2.5rem;
-   border-radius: 0.375rem;
-
-   display: flex;
-   flex-direction: column;
-
-   row-gap: 2rem;
-
-   background: ${props => props.theme["base-card"]};
-
-   .form-header{
-      display: grid;
-
-      grid-template-areas:
-      "svg title" "svg span";
-
-      grid-template-columns: auto 1fr;
-
-      row-gap: 0.125rem;
-      column-gap: 0.5rem;
-   }
-
-   .form-header > svg{
-      grid-area: svg;
-      color: ${props => props.theme["purple-dark"]};
-   }
-
-   .form-header > h1{
-      grid-area: title;
-
-      margin: 0;
-      font-size: 1rem;
-      font-weight: 400;
-      font-family: 'Roboto', sans-serif;
-      color: ${props => props.theme["base-subtitle"]};
-   }
-
-   .form-header > span{
-      grid-area: span;
-      font-size: 0.875rem;
-      font-weight: 400;
-      font-family: 'Roboto', sans-serif;
-      color: ${props => props.theme["base-text"]};
-   }
-
-   .payment-buttons{
-      display: flex;
-      column-gap: 0.75rem;
    }
 `
 
@@ -170,7 +158,8 @@ export const PaymentButton = styled.button`
       background: ${porps => porps.theme["base-hover"]};
    }
 
-   &:active{
+   &:focus{
+      background: ${porps => porps.theme["purple-light"]};
       outline: 1px solid ${porps => porps.theme.purple};
    }
 `

@@ -25,4 +25,8 @@ export const InputContainer = styled.div`
       font-size: 0.875rem;
       color: ${props => props.theme["base-text"]};
    }
+
+   &:focus-within{
+      outline: 1px solid ${props => props.theme["yellow-dark"]};
+   }
 `
