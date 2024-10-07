@@ -17,7 +17,7 @@ export function OrderCoffeCard(){
                <div className="buttons">
                   <Stepper />
 
-                  <RemoveButton>
+                  <RemoveButton type="button">
                      <Trash size={16}/>
                      Remover
                   </RemoveButton>

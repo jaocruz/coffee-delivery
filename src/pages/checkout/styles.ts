@@ -37,7 +37,7 @@ export const CheckoutContainer = styled.main`
    }
 `
 
-const BaseContainer = styled.div`
+export const BaseContainer = styled.div`
    display: flex;
    flex-direction: column;
    
@@ -80,23 +80,31 @@ const BaseContainer = styled.div`
       font-family: 'Roboto', sans-serif;
       color: ${props => props.theme["base-text"]};
    }
-`
-
-export const FormContainer = styled(BaseContainer)`
-   svg{ color: ${props => props.theme["yellow-dark"]};}
-`
-
-export const PaymentMethodContainer = styled(BaseContainer)`
-   svg{
-      color: ${props => props.theme["purple-dark"]};
-   }
 
    .payment-buttons{
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       column-gap: 0.75rem;
    }
+
+   .address-icon{
+      color: ${props => props.theme["yellow-dark"]};
+   }
+
+   .payment-icon{
+      color: ${props => props.theme["purple-dark"]};
+   }
 `
+
+// export const FormContainer = styled(BaseContainer)`
+//    svg{ color: ${props => props.theme["yellow-dark"]};}
+// `
+
+// export const PaymentMethodContainer = styled(BaseContainer)`
+//    svg{
+//       color: ${props => props.theme["purple-dark"]};
+//    }
+// `
 
 export const CoffeOrderContainer = styled(BaseContainer)`
    row-gap: 1.5rem;
@@ -175,43 +183,5 @@ export const FormContent = styled.div`
       display: grid;
       column-gap: 0.75rem;
       grid-template-columns: auto 1fr 3.75rem;
-   }
-`
-
-export const PaymentButton = styled.button`
-   display: flex;
-   align-items: center;
-
-   cursor: pointer;
-
-   gap: 0.75rem;
-   padding: 1rem;
-
-   border: 0;
-   border-radius: 0.375rem;
-
-   transition: background 0.15s ease-in-out;
-
-   background: ${porps => porps.theme["base-button"]};
-
-   svg{
-      color: ${porps => porps.theme.purple};
-   }
-
-   span{
-      font-size: 0.75rem;
-      font-weight: 400;
-      line-height: 160%;
-      text-transform: uppercase;
-      color: ${porps => porps.theme["base-text"]};
-   }
-
-   &:hover{
-      background: ${porps => porps.theme["base-hover"]};
-   }
-
-   &:focus{
-      background: ${porps => porps.theme["purple-light"]};
-      outline: 1px solid ${porps => porps.theme.purple};
    }
 `

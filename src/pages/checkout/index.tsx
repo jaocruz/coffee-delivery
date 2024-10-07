@@ -1,8 +1,9 @@
-import { CheckoutContainer, CoffeOrderContainer, ConfirmButton, FormContainer, FormContent, PaymentButton, PaymentMethodContainer } from "./styles";
+import { BaseContainer, CheckoutContainer, CoffeOrderContainer, ConfirmButton, FormContent } from "./styles";
 
 import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from "phosphor-react";
 
 import { Input } from "./components/input";
+import { PaymentButton } from "./components/paymentButton";
 import { OrderCoffeCard } from "./components/orderCoffeCard";
 
 export function Checkout(){
@@ -12,9 +13,9 @@ export function Checkout(){
             <label>Complete seu pedido</label>
 
             <div className="finish-order">
-               <FormContainer>
+               <BaseContainer>
                   <div className="form-header">
-                     <MapPinLine size={22}/>
+                     <MapPinLine size={22} className="address-icon"/>
                      <h1>Endereço de Entrega</h1>
                      <span>Informe o endereço onde deseja receber seu pedido</span>
                   </div>
@@ -35,32 +36,32 @@ export function Checkout(){
                         <Input placeholder="UF"/>
                      </div>
                   </FormContent>
-               </FormContainer>
+               </BaseContainer>
 
-               <PaymentMethodContainer>
+               <BaseContainer>
                   <div className="form-header">
-                     <CurrencyDollar size={22}/>
+                     <CurrencyDollar size={22} className="payment-icon"/>
                      <h1>Pagamento</h1>
                      <span>O pagamento é feito na entrega. Escolha a forma que deseja pagar</span>
                   </div>
 
                   <div className="payment-buttons">
-                     <PaymentButton type="button">
-                        <CreditCard />
-                        <span>Cartão de crédito</span>
-                     </PaymentButton>
+                     <PaymentButton
+                     icon={<CreditCard />}
+                     name="Cartão de crédito"
+                     />
 
-                     <PaymentButton type="button">
-                        <Bank />
-                        <span>Cartão de débito</span>
-                     </PaymentButton>
+                     <PaymentButton
+                     icon={<Bank />}
+                     name="Cartão de débito"
+                     />
 
-                     <PaymentButton type="button">
-                        <Money />
-                        <span>Dinheiro</span>
-                     </PaymentButton>
+                     <PaymentButton
+                     icon={<Money />}
+                     name="Dinheiro"
+                     />
                   </div>
-               </PaymentMethodContainer>
+               </BaseContainer>
             </div>
 
             <label>Cafés selecionados</label>

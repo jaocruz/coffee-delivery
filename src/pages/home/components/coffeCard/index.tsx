@@ -1,7 +1,8 @@
-import { Stepper } from "../../../../components/stepper";
 import { ButtonCart, CoffeBuyingInfo, CoffeCardContainer } from "./styles";
 
 import { ShoppingCart } from "phosphor-react";
+
+import { Stepper } from "../../../../components/stepper";
 
 export function CoffeCard(){
    return(
@@ -9,7 +10,7 @@ export function CoffeCard(){
          <img src="./coffe-expresso.svg" alt="" />
 
          <span>TRADICIONAL</span>
-                  
+
          <h1>Expresso Tradicional</h1>
          <h2>O tradicional café feito com água quente e grãos moídos</h2>
 

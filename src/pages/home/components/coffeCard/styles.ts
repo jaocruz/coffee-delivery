@@ -2,8 +2,7 @@ import styled from "styled-components";
 
 export const CoffeCardContainer = styled.div`
    width: 16rem;
-
-   padding: 1.25rem;
+   height: 19.375rem;
 
    display: flex;
    flex-direction: column;
@@ -20,7 +19,7 @@ export const CoffeCardContainer = styled.div`
    background-color: ${props => props.theme["base-card"]};
 
    img{
-      margin-top: -20%;
+      margin-top: -1.25rem;
       width: 7.5rem;
       height: 7.5rem;
    }
@@ -50,6 +49,7 @@ export const CoffeCardContainer = styled.div`
    }
 
    h2{
+      width: 13.5rem;
       font-size: 0.875rem;
       font-weight: 400;
       
@@ -61,14 +61,10 @@ export const CoffeCardContainer = styled.div`
 `
 
 export const CoffeBuyingInfo = styled.div`
-   width: 100%;
-   gap: 1.5rem;
-
+   width: 13rem;
+   
    display: flex;
-   align-items: center;
-   justify-content: center;
-
-   font-size: 0.875rem;
+   justify-content: space-between;
 
    h3{
       font-size: 1.5rem;

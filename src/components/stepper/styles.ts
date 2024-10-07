@@ -3,14 +3,15 @@ import styled from "styled-components"
 export const StepperContainer = styled.div`
    display: flex;
    align-items: center;
-   gap: 0.5rem;
 
-   background: ${props => props.theme["base-button"]};
+   gap: 0.6rem;
 
    padding: 0.5rem;
    border-radius: 0.375rem;
+   
+   background: ${props => props.theme["base-button"]};
 
-   h1{
+   h4{
       font-weight: 500;
       font-size: 1rem;
    }
