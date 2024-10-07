@@ -46,20 +46,41 @@ export const DeliveryContainer = styled.main`
 export const OrderInfo = styled.div`
    grid-area: orderinfo;
 
+   position: relative;
+
    display: flex;
    flex-direction: column;
 
    row-gap: 2rem;
-   
    padding: 2.5rem;
 
-   border-top-left-radius: 0.375rem;
-   border-bottom-right-radius: 0.375rem;
+   background: ${props => props.theme.background};
 
-   border-top-right-radius: 2.25rem;
-   border-bottom-left-radius: 2.25rem;
+   border-top-left-radius: calc(0.375rem - 1px);
+   border-bottom-right-radius: calc(0.375rem - 1px);
 
-   border: 1px solid black;
+   border-top-right-radius: calc(2.25rem - 1px);
+   border-bottom-left-radius: calc(2.25rem - 1px);
+
+   &::before{
+      content: '';
+      z-index: -1;
+
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+
+      position: absolute;
+
+      border-top-left-radius: 0.375rem;
+      border-bottom-right-radius: 0.375rem;
+
+      border-top-right-radius: 2.25rem;
+      border-bottom-left-radius: 2.25rem;
+
+      background-image: linear-gradient(135deg, ${props => props.theme["yellow-dark"]} 0%, ${props => props.theme.purple});
+   }
 
    .item{
       display: grid;
