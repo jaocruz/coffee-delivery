@@ -7,6 +7,10 @@ export const HeaderContainer = styled.header`
    align-items: center;
    justify-content: space-between;
 
+   a{
+      display: flex;
+   }
+
    .headerButtons{
       display: flex;
       gap: 0.75rem;
@@ -38,5 +42,5 @@ export const LocaleButton = styled(HeaderButton)`
 
 export const CartButton = styled(HeaderButton)`
    color: ${props => props.theme["yellow-dark"]};
-   background: ${props => props.theme["yellow-light"]}
+   background: ${props => props.theme["yellow-light"]};
 `

@@ -4,10 +4,12 @@ import mainLogo from '/main-logo.svg'
 
 import { MapPin, ShoppingCart } from "phosphor-react"
 
+import { NavLink } from "react-router-dom"
+
 export function Header(){
    return(
       <HeaderContainer>
-         <img src={mainLogo} alt="" />
+         <NavLink to="/" title="home"><img src={mainLogo} alt="" /></NavLink>
 
          <div className="headerButtons">
             <LocaleButton>
@@ -15,9 +17,11 @@ export function Header(){
                <span>Porto Alegre, RS</span>
             </LocaleButton>
 
-            <CartButton onClick={() => console.log("Deu certo")}>
-               <ShoppingCart weight="fill" size={22}/>
-            </CartButton>
+            <NavLink to="/checkout" title="checkout">
+               <CartButton onClick={() => console.log("Deu certo")}>
+                  <ShoppingCart weight="fill" size={22}/>
+               </CartButton>
+            </NavLink>
          </div>
       </HeaderContainer>
    )

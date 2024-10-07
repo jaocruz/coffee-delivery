@@ -4,6 +4,8 @@ import { ShoppingCart } from "phosphor-react";
 
 import { Stepper } from "../../../../components/stepper";
 
+import { useState } from "react";
+
 interface Tag{
    name: string
 }
@@ -17,6 +19,12 @@ interface CoffeProps{
 }
 
 export function CoffeeCard({ name, tags, description, value, photo }: CoffeProps){
+   const [quantity, setQuantity] = useState(1)
+
+   function handleAddToCart(){
+      console.log(`adicionado ${quantity} itens ao carrinho`)
+   }
+
    return(
       <CoffeCardContainer>
          <img src={photo} alt="" />
@@ -24,7 +32,7 @@ export function CoffeeCard({ name, tags, description, value, photo }: CoffeProps
          <div className="tags">
             {tags.map(tag => {
                return(
-                  <span>{tag.name.toUpperCase()}</span>
+                  <span key={tag.name}>{tag.name.toUpperCase()}</span>
                )
             })}
          </div>
@@ -36,9 +44,12 @@ export function CoffeeCard({ name, tags, description, value, photo }: CoffeProps
             <h3>{value.toFixed(2)}</h3>
 
             <div>
-               <Stepper />
+               <Stepper
+               quantity={quantity}
+               setQuantity={setQuantity}
+               />
 
-               <ButtonCart>
+               <ButtonCart onClick={handleAddToCart}>
                   <ShoppingCart weight="fill" size={22}/>
                </ButtonCart>
             </div>
