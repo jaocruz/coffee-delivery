@@ -24,6 +24,11 @@ export const CoffeCardContainer = styled.div`
       height: 7.5rem;
    }
 
+   .tags{
+      display: flex;
+      column-gap: 0.25rem;
+   }
+
    span{
       width: fit-content;
       font-size: 0.625rem;

@@ -4,18 +4,36 @@ import { ShoppingCart } from "phosphor-react";
 
 import { Stepper } from "../../../../components/stepper";
 
-export function CoffeCard(){
+interface Tag{
+   name: string
+}
+
+interface CoffeProps{
+   name: string
+   tags: Tag[]
+   description: string
+   value: number
+   photo: string
+}
+
+export function CoffeeCard({ name, tags, description, value, photo }: CoffeProps){
    return(
       <CoffeCardContainer>
-         <img src="./coffe-expresso.svg" alt="" />
+         <img src={photo} alt="" />
 
-         <span>TRADICIONAL</span>
+         <div className="tags">
+            {tags.map(tag => {
+               return(
+                  <span>{tag.name.toUpperCase()}</span>
+               )
+            })}
+         </div>
 
-         <h1>Expresso Tradicional</h1>
-         <h2>O tradicional café feito com água quente e grãos moídos</h2>
+         <h1>{name}</h1>
+         <h2>{description}</h2>
 
          <CoffeBuyingInfo>
-            <h3>9,90</h3>
+            <h3>{value.toFixed(2)}</h3>
 
             <div>
                <Stepper />
