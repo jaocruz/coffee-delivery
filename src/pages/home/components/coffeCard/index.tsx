@@ -1,6 +1,7 @@
-import { ButtonCart, CoffeBuyingInfo, CoffeCardContainer, Stepper } from "./styles";
+import { Stepper } from "../../../../components/stepper";
+import { ButtonCart, CoffeBuyingInfo, CoffeCardContainer } from "./styles";
 
-import { Minus, Plus, ShoppingCart } from "phosphor-react";
+import { ShoppingCart } from "phosphor-react";
 
 export function CoffeCard(){
    return(
@@ -16,11 +17,7 @@ export function CoffeCard(){
             <h3>9,90</h3>
 
             <div>
-               <Stepper>
-                  <Minus size={14}/>
-                  <h1>1</h1>
-                  <Plus size={14}/>
-               </Stepper>
+               <Stepper />
 
                <ButtonCart>
                   <ShoppingCart weight="fill" size={22}/>
