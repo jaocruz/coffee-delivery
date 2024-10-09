@@ -18,7 +18,7 @@ export function Header(){
             </LocaleButton>
 
             <NavLink to="/checkout" title="checkout">
-               <CartButton onClick={() => console.log("Deu certo")}>
+               <CartButton>
                   <ShoppingCart weight="fill" size={22}/>
                </CartButton>
             </NavLink>

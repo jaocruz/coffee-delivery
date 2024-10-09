@@ -96,17 +96,7 @@ export const BaseContainer = styled.div`
    }
 `
 
-// export const FormContainer = styled(BaseContainer)`
-//    svg{ color: ${props => props.theme["yellow-dark"]};}
-// `
-
-// export const PaymentMethodContainer = styled(BaseContainer)`
-//    svg{
-//       color: ${props => props.theme["purple-dark"]};
-//    }
-// `
-
-export const CoffeOrderContainer = styled(BaseContainer)`
+export const CoffeeOrderContainer = styled(BaseContainer)`
    row-gap: 1.5rem;
 
    border-top-right-radius: 2.75rem;
@@ -117,24 +107,24 @@ export const CoffeOrderContainer = styled(BaseContainer)`
       border: 1px solid ${props => props.theme["base-button"]};
    }
 
-   .coffeInfo{
+   .coffeeInfo{
       display: grid;
       row-gap: 0.75rem;
    }
 
-   .coffeInfo > div{
+   .coffeeInfo > div{
       display: flex;
       align-items: center;
       justify-content: space-between;
       color: ${props => props.theme["base-text"]};
    }
 
-   .coffeInfo > div span:first-child{
+   .coffeeInfo > div span:first-child{
       font-size: 0.875rem;
       font-weight: 400;
    }
 
-   .coffeInfo > div strong{
+   .coffeeInfo > div strong{
       font-size: 1.25rem;
       font-weight: bold;
       color: ${props => props.theme["base-subtitle"]};

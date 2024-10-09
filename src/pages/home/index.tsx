@@ -1,10 +1,12 @@
-import { CoffeList, HomeContainer, HomeIntro, SeparatedItem } from "./styles"
+import { CoffeeList, HomeContainer, HomeIntro, SeparatedItem } from "./styles"
 
 import mainPicture from "/main-picture.svg"
 
 import { Coffee, Package, ShoppingCart, Timer } from "phosphor-react"
 
-import { CoffeeCard } from "./components/coffeCard"
+import { CoffeeCard, CoffeOrderProps } from "./components/coffeeCard"
+
+import { useState } from "react"
 
 const coffeeList = [
    {
@@ -172,6 +174,14 @@ const coffeeList = [
 ]
 
 export function Home(){
+   const [coffeeOrder, setCoffeeOrder] = useState<CoffeOrderProps[]>([])
+
+   function handleAddNewCoffeToCart(newCoffee: CoffeOrderProps){
+      setCoffeeOrder(prevState => [...prevState, newCoffee])
+   }
+
+   console.log(coffeeOrder)
+   
    return(
       <HomeContainer>
          <HomeIntro>
@@ -197,7 +207,7 @@ export function Home(){
                </SeparatedItem>
 
                <SeparatedItem>
-                  <Coffee weight="fill" className="coffe"/>
+                  <Coffee weight="fill" className="coffee"/>
                   <span>O café chega fresquinho até você</span>
                </SeparatedItem>
             </div>
@@ -205,7 +215,7 @@ export function Home(){
             <img src={mainPicture} alt="" />
          </HomeIntro>
 
-         <CoffeList>
+         <CoffeeList>
             <h1>Nossos cafés</h1>
 
             <div className="list">
@@ -213,16 +223,18 @@ export function Home(){
                   return(
                      <CoffeeCard
                      key={cafe.id}
+                     id={cafe.id}
                      photo={cafe.photo}
                      tags={cafe.tags}
                      name={cafe.name}
                      description={cafe.description}
                      value={cafe.value}
+                     onAddNewCoffeToCart={handleAddNewCoffeToCart}
                      />
                   )
                })}
             </div>
-         </CoffeList>
+         </CoffeeList>
       </HomeContainer>
    )
 }

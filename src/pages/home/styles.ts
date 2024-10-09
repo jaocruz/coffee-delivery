@@ -100,12 +100,12 @@ export const SeparatedItem = styled.div`
       background: ${props => props.theme["yellow"]};
     }
 
-    .coffe{
+    .coffee{
       background: ${props => props.theme["purple"]};
     }
 `
 
-export const CoffeList = styled.div`
+export const CoffeeList = styled.div`
    display: flex;
    flex-direction: column;
    

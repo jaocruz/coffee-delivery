@@ -10,19 +10,29 @@ interface Tag{
    name: string
 }
 
-interface CoffeProps{
+export interface CoffeProps{
+   id: number
    name: string
    tags: Tag[]
    description: string
    value: number
    photo: string
+   onAddNewCoffeToCart: (newCoffe: CoffeOrderProps) => void
 }
 
-export function CoffeeCard({ name, tags, description, value, photo }: CoffeProps){
+export interface CoffeOrderProps{
+   id: number
+   name: string
+   value: number
+   photo: string
+   quantity: number
+}
+
+export function CoffeeCard({ id, name, tags, description, value, photo, onAddNewCoffeToCart }: CoffeProps){
    const [quantity, setQuantity] = useState(1)
 
-   function handleAddToCart(){
-      console.log(`adicionado ${quantity} itens ao carrinho`)
+   function handleAddNewCoffeToCart(){
+      onAddNewCoffeToCart({id, name, value, photo, quantity})
    }
 
    return(
@@ -49,7 +59,7 @@ export function CoffeeCard({ name, tags, description, value, photo }: CoffeProps
                setQuantity={setQuantity}
                />
 
-               <ButtonCart onClick={handleAddToCart}>
+               <ButtonCart onClick={handleAddNewCoffeToCart}>
                   <ShoppingCart weight="fill" size={22}/>
                </ButtonCart>
             </div>

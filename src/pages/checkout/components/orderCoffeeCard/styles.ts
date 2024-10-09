@@ -17,13 +17,13 @@ export const OrderCardContainer = styled.div`
       height: 4rem;
    }
 
-   .coffe-info{
+   .coffee-info{
       display: flex;
       flex-direction: column;
       row-gap: 0.5rem;
    }
 
-   .coffe-info > span{
+   .coffee-info > span{
       font-size: 1rem;
       font-weight: 500;
    }
