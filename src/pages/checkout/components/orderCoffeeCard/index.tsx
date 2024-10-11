@@ -4,35 +4,30 @@ import { Trash } from "phosphor-react"
 
 import { Stepper } from "../../../../components/stepper"
 
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { CoffeeOrderContext } from "../../../../contexts/orderContext"
 
-interface OrderCoffeeCardProps{
+interface CoffeeCardOnOrderProps{
+   id: number
    name: string
-   value: number
    photo: string
+   value: number
    quantity: number
 }
 
-export function OrderCoffeeCard({ name, value, photo, quantity }: OrderCoffeeCardProps){
-   const [itemQuantity, setItemQuantity] = useState(quantity)
-   const [coffeePrice, setCoffeePrice] = useState(value * quantity)
-
-   useEffect(() => {
-      setCoffeePrice(value * itemQuantity)
-   }, [itemQuantity, value])
-
+export function OrderCoffeeCard(data: CoffeeCardOnOrderProps){
    return(
       <OrderCardContainer>
          <div className="coffee">
-            <img src={photo} alt="" />
+            <img src={data.photo} alt="" />
 
             <div className="coffee-info">
-               <span>{name}</span>
+               <span>{data.name}</span>
 
                <div className="buttons">
                   <Stepper
-                  quantity={itemQuantity}
-                  setQuantity={setItemQuantity}
+                  itemCounter={data.quantity}
+                  setItemCounter={() => console.log('teste temporario')}
                   />
 
                   <RemoveButton type="button">
@@ -43,7 +38,7 @@ export function OrderCoffeeCard({ name, value, photo, quantity }: OrderCoffeeCar
             </div>
          </div>
 
-         <strong>R$ {coffeePrice.toFixed(2)}</strong>
+         <strong>R$ {(data.value * data.quantity).toFixed(2)}</strong>
       </OrderCardContainer>
    )
 }

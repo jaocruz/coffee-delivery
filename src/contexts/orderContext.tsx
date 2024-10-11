@@ -15,7 +15,7 @@ export interface CoffeeDataProps{
 }
 
 interface CoffeeOrderContextData{
-   coffeeOrderList: CoffeeDataProps[] | undefined
+   coffeeOrderList: CoffeeDataProps[]
    handleAddNewCoffeeToOrder: (newCoffee: CoffeeDataProps) => void
 }
  
@@ -57,7 +57,7 @@ export function CoffeeOrderContextProvider({ children }:CoffeeOrderProviderProps
       <CoffeeOrderContext.Provider
       value={{
          coffeeOrderList,
-         handleAddNewCoffeeToOrder
+         handleAddNewCoffeeToOrder,
       }}>
          {children}
       </CoffeeOrderContext.Provider>

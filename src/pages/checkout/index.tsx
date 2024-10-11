@@ -6,17 +6,12 @@ import { Input } from "./components/input";
 import { PaymentButton } from "./components/paymentButton";
 import { OrderCoffeeCard } from "./components/orderCoffeeCard";
 
-import { useEffect, useState } from "react";
-
-interface CoffeProps{
-   id: number
-   name: string
-   value: number
-   photo: string
-   quantity: number
-}
+import { useContext } from "react";
+import { CoffeeOrderContext } from "../../contexts/orderContext";
 
 export function Checkout(){
+   const { coffeeOrderList } = useContext(CoffeeOrderContext)
+
    return(
       <CheckoutContainer>
          <form action="">
@@ -77,7 +72,23 @@ export function Checkout(){
             <label>Cafés selecionados</label>
 
             <CoffeeOrderContainer>
-               
+               {
+                  coffeeOrderList?.map(coffee => {
+                     return(
+                        <>
+                        <OrderCoffeeCard
+                        id={coffee.id}
+                        name={coffee.name}
+                        photo={coffee.photo}
+                        value={coffee.value}
+                        quantity={coffee.quantity}
+                        />
+
+                        <div className="divider" />
+                        </>
+                     )
+                  })
+               }
 
                <div className="coffeeInfo">
                   <div>
