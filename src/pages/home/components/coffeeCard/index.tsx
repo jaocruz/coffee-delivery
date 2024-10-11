@@ -4,54 +4,41 @@ import { ShoppingCart } from "phosphor-react";
 
 import { Stepper } from "../../../../components/stepper";
 
-import { CoffeeOnOrderProps } from "../..";
-
 import { useState } from "react";
 
-interface Tag{
-   name: string
+import { CoffeeDataProps } from "../../../../contexts/orderContext";
+
+interface CoffeeCardProps{
+   coffee: CoffeeDataProps
+   onAddNewCoffeToOrder: (newCoffee: CoffeeDataProps) => void
 }
 
-interface CoffeePropsData{
-   id: number
-   tags: Tag[]
-   name: string
-   value: number
-   photo: string
-   description: string
-   onAddNewCoffeeToOrder: (coffee: CoffeeOnOrderProps) => void
-}
+export function CoffeeCard({coffee, onAddNewCoffeToOrder}: CoffeeCardProps){
+   const { name, photo, tags, value, description } = coffee
 
-export function CoffeeCard(data: CoffeePropsData){
    const [quantity, setQuantity] = useState(1)
 
    function handleAddNewCoffeeToOrder(){
-      data.onAddNewCoffeeToOrder({
-         id: data.id,
-         name: data.name,
-         value: data.value,
-         photo: data.photo,
-         quantity: quantity
-      })
+      onAddNewCoffeToOrder({...coffee, quantity})
    }
 
    return(
       <CoffeCardContainer>
-         <img src={data.photo} alt="" />
+         <img src={photo} alt="" />
 
          <div className="tags">
-            {data.tags.map(tag => {
+            {tags.map(tag => {
                return(
                   <span key={tag.name}>{tag.name.toUpperCase()}</span>
                )
             })}
          </div>
 
-         <h1>{data.name}</h1>
-         <h2>{data.description}</h2>
+         <h1>{name}</h1>
+         <h2>{description}</h2>
 
          <CoffeBuyingInfo>
-            <h3>{data.value.toFixed(2)}</h3>
+            <h3>{value.toFixed(2)}</h3>
 
             <div>
                <Stepper

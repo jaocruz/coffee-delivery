@@ -8,45 +8,12 @@ import { CoffeeCard } from "./components/coffeeCard"
 
 import { coffeeList } from "./components/coffeeList"
 
-import { useState } from "react"
-
-export interface CoffeeOnOrderProps{
-   id: number
-   name: string
-   value: number
-   photo: string
-   quantity: number
-}
+import { useContext } from "react"
+import { CoffeeOrderContext } from "../../contexts/orderContext"
 
 export function Home(){
-   const [coffeeOrder, setCoffeeOrder] = useState<CoffeeOnOrderProps[]>([])
-
-   function handleAddNewCoffeeToOrder(newCoffee: CoffeeOnOrderProps){
-      
-      setCoffeeOrder(prevState => {
-         const existingCoffeeOnOrder = prevState.findIndex(coffee => coffee.id === newCoffee.id)
-         
-         if(existingCoffeeOnOrder !== -1){
-            const updatedCoffeeQuantity = {
-               ...prevState[existingCoffeeOnOrder],
-               quantity: prevState[existingCoffeeOnOrder].quantity + newCoffee.quantity
-            }
+   const { handleAddNewCoffeeToOrder } = useContext(CoffeeOrderContext)
    
-            return [
-               ...prevState.slice(0, existingCoffeeOnOrder),
-               updatedCoffeeQuantity,
-               ...prevState.slice(existingCoffeeOnOrder +1)
-            ]
-         }
-   
-         else{
-            return [...prevState, newCoffee]
-         }
-      })
-   }
-
-   console.log(coffeeOrder)
-
    return(
       <HomeContainer>
          <HomeIntro>
@@ -88,13 +55,8 @@ export function Home(){
                   return(
                      <CoffeeCard
                      key={cafe.id}
-                     id={cafe.id}
-                     name={cafe.name}
-                     photo={cafe.photo}
-                     tags={cafe.tags}
-                     value={cafe.value}
-                     description={cafe.description}
-                     onAddNewCoffeeToOrder={handleAddNewCoffeeToOrder}
+                     coffee={cafe}
+                     onAddNewCoffeToOrder={handleAddNewCoffeeToOrder}
                      />
                   )
                })}
