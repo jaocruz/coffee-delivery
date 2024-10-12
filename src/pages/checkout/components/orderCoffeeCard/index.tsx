@@ -4,33 +4,34 @@ import { Trash } from "phosphor-react"
 
 import { Stepper } from "../../../../components/stepper"
 
-import { useContext, useEffect, useState } from "react"
-import { CoffeeOrderContext } from "../../../../contexts/orderContext"
+import { CoffeeDataProps } from "../../../../contexts/orderContext"
 
-interface CoffeeCardOnOrderProps{
-   id: number
-   name: string
-   photo: string
-   value: number
-   quantity: number
+interface OrderCoffeeCardProps{
+   coffee: CoffeeDataProps
+   onRemoveCoffeFroOrder: (coffeeToRemove: CoffeeDataProps) => void
 }
 
-export function OrderCoffeeCard(data: CoffeeCardOnOrderProps){
+export function OrderCoffeeCard({coffee, onRemoveCoffeFroOrder}: OrderCoffeeCardProps){
+
+   function handleRemoveCoffeFroOrder(){
+      onRemoveCoffeFroOrder({...coffee})
+   }
+
    return(
       <OrderCardContainer>
          <div className="coffee">
-            <img src={data.photo} alt="" />
+            <img src={coffee.photo} alt="" />
 
             <div className="coffee-info">
-               <span>{data.name}</span>
+               <span>{coffee.name}</span>
 
                <div className="buttons">
                   <Stepper
-                  itemCounter={data.quantity}
+                  itemCounter={coffee.quantity}
                   setItemCounter={() => console.log('teste temporario')}
                   />
 
-                  <RemoveButton type="button">
+                  <RemoveButton type="button" onClick={handleRemoveCoffeFroOrder}>
                      <Trash size={16}/>
                      Remover
                   </RemoveButton>
@@ -38,7 +39,7 @@ export function OrderCoffeeCard(data: CoffeeCardOnOrderProps){
             </div>
          </div>
 
-         <strong>R$ {(data.value * data.quantity).toFixed(2)}</strong>
+         <strong>R$ {(coffee.value * coffee.quantity).toFixed(2)}</strong>
       </OrderCardContainer>
    )
 }

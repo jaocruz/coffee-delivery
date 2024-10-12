@@ -17,6 +17,7 @@ export interface CoffeeDataProps{
 interface CoffeeOrderContextData{
    coffeeOrderList: CoffeeDataProps[]
    handleAddNewCoffeeToOrder: (newCoffee: CoffeeDataProps) => void
+   handleRemoveCoffeFromOrder: (coffeToRemove: CoffeeDataProps) => void
 }
  
 export const CoffeeOrderContext = createContext({} as CoffeeOrderContextData)
@@ -51,6 +52,12 @@ export function CoffeeOrderContextProvider({ children }:CoffeeOrderProviderProps
       })
    }
 
+   function handleRemoveCoffeFromOrder(coffeeToRemove: CoffeeDataProps){
+      setCoffeeOrderList(prevState => {
+         return prevState.filter(coffee => coffee.id !== coffeeToRemove.id)
+      })
+   }
+
    console.log(coffeeOrderList)
 
    return(
@@ -58,6 +65,7 @@ export function CoffeeOrderContextProvider({ children }:CoffeeOrderProviderProps
       value={{
          coffeeOrderList,
          handleAddNewCoffeeToOrder,
+         handleRemoveCoffeFromOrder
       }}>
          {children}
       </CoffeeOrderContext.Provider>

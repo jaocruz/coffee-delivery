@@ -10,7 +10,7 @@ import { useContext } from "react";
 import { CoffeeOrderContext } from "../../contexts/orderContext";
 
 export function Checkout(){
-   const { coffeeOrderList } = useContext(CoffeeOrderContext)
+   const { coffeeOrderList, handleRemoveCoffeFromOrder } = useContext(CoffeeOrderContext)
 
    const totalOrderPrice = coffeeOrderList.reduce((total, coffee) => {
       return total + (coffee.value * coffee.quantity)
@@ -81,19 +81,16 @@ export function Checkout(){
 
             <CoffeeOrderContainer>
                {
-                  coffeeOrderList?.map(coffee => {
+                  coffeeOrderList?.map(cafe => {
                      return(
-                        <>
-                        <OrderCoffeeCard
-                        id={coffee.id}
-                        name={coffee.name}
-                        photo={coffee.photo}
-                        value={coffee.value}
-                        quantity={coffee.quantity}
-                        />
+                        <div className="coffe-cards" key={cafe.id}>
+                           <OrderCoffeeCard
+                           coffee={cafe}
+                           onRemoveCoffeFroOrder={handleRemoveCoffeFromOrder}
+                           />
 
-                        <div className="divider" />
-                        </>
+                           <div className="divider" />
+                        </div>
                      )
                   })
                }

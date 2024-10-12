@@ -102,6 +102,13 @@ export const CoffeeOrderContainer = styled(BaseContainer)`
    border-top-right-radius: 2.75rem;
    border-bottom-left-radius: 2.75rem;
 
+   .coffe-cards{
+      display: flex;
+      flex-direction: column;
+
+      row-gap: 1.5rem;
+   }
+
    .divider{
       height: 0;
       border: 1px solid ${props => props.theme["base-button"]};
