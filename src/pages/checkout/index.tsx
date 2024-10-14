@@ -6,19 +6,25 @@ import { Input } from "./components/input";
 import { PaymentButton } from "./components/paymentButton";
 import { OrderCoffeeCard } from "./components/orderCoffeeCard";
 
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CoffeeOrderContext } from "../../contexts/orderContext";
 
 export function Checkout(){
    const { coffeeOrderList, handleRemoveCoffeFromOrder } = useContext(CoffeeOrderContext)
-
-   const totalOrderPrice = coffeeOrderList.reduce((total, coffee) => {
-      return total + (coffee.value * coffee.quantity)
-   }, 0)
+   
+   const [totalOrderPrice, setTotalOrderPrice] = useState(0)
 
    const deliveryPrice = 3.50
 
    const finalTotalPrice = totalOrderPrice + deliveryPrice
+
+   useEffect(() => {
+      const total = coffeeOrderList.reduce((total, coffee) => {
+         return total + (coffee.value * coffee.quantity)
+      }, 0)
+
+      setTotalOrderPrice(total)
+   }, [coffeeOrderList])
 
    return(
       <CheckoutContainer>

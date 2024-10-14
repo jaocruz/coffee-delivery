@@ -18,6 +18,7 @@ interface CoffeeOrderContextData{
    coffeeOrderList: CoffeeDataProps[]
    handleAddNewCoffeeToOrder: (newCoffee: CoffeeDataProps) => void
    handleRemoveCoffeFromOrder: (coffeToRemove: CoffeeDataProps) => void
+   updateTotalOrderPrice: (coffeeId: number, newQuantity: number) => void
 }
  
 export const CoffeeOrderContext = createContext({} as CoffeeOrderContextData)
@@ -58,14 +59,19 @@ export function CoffeeOrderContextProvider({ children }:CoffeeOrderProviderProps
       })
    }
 
-   console.log(coffeeOrderList)
+   function updateTotalOrderPrice(coffeeId: number, newQuantity: number){
+      setCoffeeOrderList((prev) => prev.map((coffee) =>
+         coffee.id === coffeeId ? {...coffee, quantity: newQuantity} : coffee
+      ))
+   }
 
    return(
       <CoffeeOrderContext.Provider
       value={{
          coffeeOrderList,
          handleAddNewCoffeeToOrder,
-         handleRemoveCoffeFromOrder
+         handleRemoveCoffeFromOrder,
+         updateTotalOrderPrice
       }}>
          {children}
       </CoffeeOrderContext.Provider>
