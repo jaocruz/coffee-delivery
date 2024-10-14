@@ -6,8 +6,6 @@ export const CheckoutContainer = styled.main`
    form{
       display: grid;
 
-      align-items: start;
-
       grid-template-areas:
       "titulo1 titulo2"
       "entrega pedido";
@@ -99,18 +97,46 @@ export const BaseContainer = styled.div`
 export const CoffeeOrderContainer = styled(BaseContainer)`
    row-gap: 1.5rem;
 
+   display: grid;
+   grid-template-rows: 1fr auto;
+
    border-top-right-radius: 2.75rem;
    border-bottom-left-radius: 2.75rem;
 
-   .coffe-cards{
+   .coffeeCards{
+      max-height: 20.5rem;
+      overflow-y: scroll;
+
+      display: grid;
+      row-gap: 1.5rem;
+
+      padding-right: 0.25rem;
+
+      &::-webkit-scrollbar {
+         width: 0.35rem;
+      }
+
+      &::-webkit-scrollbar-track {
+         background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+         border-radius: 0.5rem;
+         background: ${props => props.theme.yellow};
+      }
+   }
+
+   .coffee-card-item{
       display: flex;
       flex-direction: column;
 
       row-gap: 1.5rem;
    }
 
-   .divider{
-      height: 0;
+   .coffee-card-item::after{
+      display: block;
+      
+      content: '';
       border: 1px solid ${props => props.theme["base-button"]};
    }
 

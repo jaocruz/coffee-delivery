@@ -86,20 +86,20 @@ export function Checkout(){
             <label>Cafés selecionados</label>
 
             <CoffeeOrderContainer>
-               {
-                  coffeeOrderList?.map(cafe => {
-                     return(
-                        <div className="coffe-cards" key={cafe.id}>
-                           <OrderCoffeeCard
-                           coffee={cafe}
-                           onRemoveCoffeFroOrder={handleRemoveCoffeFromOrder}
-                           />
-
-                           <div className="divider" />
-                        </div>
-                     )
-                  })
-               }
+               <div className="coffeeCards">
+                  {
+                     coffeeOrderList?.map(cafe => {
+                        return(
+                           <div className="coffee-card-item" key={cafe.id}>
+                              <OrderCoffeeCard
+                              coffee={cafe}
+                              onRemoveCoffeFroOrder={handleRemoveCoffeFromOrder}
+                              />
+                           </div>
+                        )
+                     })
+                  }
+               </div>
 
                <div className="coffeeInfo">
                   <div>
