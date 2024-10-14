@@ -107,9 +107,9 @@ export const CoffeeOrderContainer = styled(BaseContainer)`
       max-height: 20.5rem;
       overflow-y: scroll;
 
-      display: grid;
+      display: flex;
       row-gap: 1.5rem;
-
+      flex-direction: column;
       padding-right: 0.25rem;
 
       &::-webkit-scrollbar {

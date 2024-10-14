@@ -41,6 +41,30 @@ export const LocaleButton = styled(HeaderButton)`
 `
 
 export const CartButton = styled(HeaderButton)`
+   position: relative;
+
    color: ${props => props.theme["yellow-dark"]};
    background: ${props => props.theme["yellow-light"]};
+
+   .item-counter{
+      position: absolute;
+
+      top: -0.45em;
+      right: -0.5rem;
+
+      width: 1.25rem;
+      height: 1.25rem;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 999px;
+
+      font-size: 0.75rem;
+      font-weight: bold;
+
+      color: ${props => props.theme.white};
+      background: ${props => props.theme["yellow-dark"]};
+   }
 `
