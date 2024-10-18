@@ -25,8 +25,6 @@ export function Header(){
             </LocaleButton>
 
             <NavLink to="/checkout" title="checkout">
-               
-
                <CartButton>
                   <div className="item-counter">
                      {itensOnOrder}

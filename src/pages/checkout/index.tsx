@@ -6,8 +6,12 @@ import { Input } from "./components/input";
 import { PaymentButton } from "./components/paymentButton";
 import { OrderCoffeeCard } from "./components/orderCoffeeCard";
 
+import { NavLink } from "react-router-dom";
+
 import { useContext, useEffect, useState } from "react";
 import { CoffeeOrderContext } from "../../contexts/orderContext";
+
+import { useForm } from "react-hook-form"
 
 export function Checkout(){
    const { coffeeOrderList, handleRemoveCoffeFromOrder } = useContext(CoffeeOrderContext)
@@ -17,6 +21,18 @@ export function Checkout(){
    const deliveryPrice = 3.50
 
    const finalTotalPrice = totalOrderPrice + deliveryPrice
+
+   const { register, handleSubmit, watch } = useForm()
+
+   function handleCreateNewAddress(data: any){
+      console.log(data)
+   }
+
+   const formInformations = watch([
+      "cep", "street", "number", "complement", "neighborhood", "city", "uf"
+   ])
+
+   const isSubmitDisabled = !formInformations.every(formInformations => formInformations)
 
    useEffect(() => {
       const total = coffeeOrderList.reduce((total, coffee) => {
@@ -28,7 +44,7 @@ export function Checkout(){
 
    return(
       <CheckoutContainer>
-         <form action="">
+         <form onSubmit={handleSubmit(handleCreateNewAddress)} action="">
             <label>Complete seu pedido</label>
 
             <div className="finish-order">
@@ -40,19 +56,50 @@ export function Checkout(){
                   </div>
 
                   <FormContent>
-                     <Input placeholder="CEP"/>
+                     <Input
+                     type="number"
+                     placeholder="CEP"
+                     {...register('cep')}
+                     />
 
-                     <Input placeholder="Rua"/>
+                     <Input
+                     type="text"
+                     placeholder="Rua"
+                     {...register('street')}
+                     />
 
                      <div className="info-line01">
-                        <Input placeholder="Número"/>
-                        <Input placeholder="Complemento"/>
+                        <Input
+                        type="number"
+                        placeholder="Número"
+                        {...register('number')}
+                        />
+
+                        <Input
+                        type="text"
+                        placeholder="Complemento"
+                        {...register('complement')}
+                        />
                      </div>
 
                      <div className="info-line02">
-                        <Input placeholder="Bairro"/>
-                        <Input placeholder="Cidade"/>
-                        <Input placeholder="UF"/>
+                        <Input
+                        type="text"
+                        placeholder="Bairro"
+                        {...register('neighborhood')}
+                        />
+
+                        <Input
+                        type="text"
+                        placeholder="Cidade"
+                        {...register('city')}
+                        />
+
+                        <Input
+                        type="text"
+                        placeholder="UF"
+                        {...register('uf')}
+                        />
                      </div>
                   </FormContent>
                </BaseContainer>
@@ -118,9 +165,11 @@ export function Checkout(){
                   </div>
                </div>
 
-               <ConfirmButton type="button">
-                  Confirmar pedido
-               </ConfirmButton>
+               <NavLink to="/delivery" title="delivery">
+                  <ConfirmButton type="submit" disabled={isSubmitDisabled}>
+                     Confirmar pedido
+                  </ConfirmButton>
+               </NavLink>
             </CoffeeOrderContainer>
          </form>
       </CheckoutContainer>

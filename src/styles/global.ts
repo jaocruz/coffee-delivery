@@ -17,4 +17,9 @@ export const GlobalStyle = createGlobalStyle`
       font-weight: 400;
       font-family: 'Roboto', sans-serif;
    }
+
+   a {
+      text-decoration: none;
+      color: ${props => props.theme.white};
+   }
 `

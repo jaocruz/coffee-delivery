@@ -1,11 +1,12 @@
+import React, { forwardRef } from "react";
 import { InputContainer } from "./styles";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement>{}
 
-export function Input({...props}: InputProps){
-   return(
+export const Input = forwardRef<HTMLInputElement, InputProps>(({...props}, ref) => {
+   return (
       <InputContainer>
-         <input type="text" {...props}/>
+         <input ref={ref} {...props} />
       </InputContainer>
    )
-}
+})

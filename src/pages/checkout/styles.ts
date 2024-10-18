@@ -165,6 +165,8 @@ export const CoffeeOrderContainer = styled(BaseContainer)`
 `
 
 export const ConfirmButton = styled.button`
+   width: 100%;
+
    border: 0;
    border-radius: 0.375rem;
 
@@ -183,6 +185,11 @@ export const ConfirmButton = styled.button`
 
    &:hover{
       background: ${props => props.theme["yellow-dark"]};
+   }
+
+   &:disabled{
+      cursor: not-allowed;
+      opacity: 75%;
    }
 `
 
