@@ -6,12 +6,33 @@ import { Input } from "./components/input";
 import { PaymentButton } from "./components/paymentButton";
 import { OrderCoffeeCard } from "./components/orderCoffeeCard";
 
-import { NavLink } from "react-router-dom";
-
 import { useContext, useEffect, useState } from "react";
 import { CoffeeOrderContext } from "../../contexts/orderContext";
 
 import { useForm } from "react-hook-form"
+
+import * as zod from "zod"
+
+import { zodResolver } from "@hookform/resolvers/zod"
+
+const newDeliveryFormValidationSchema = zod.object({
+   cep: zod.number().min(10000000, "Informe um CEP válido").max(99999999, "Informe um CEP válido"),
+   street: zod.string().min(3, "O nome da rua é obrigatório"),
+   number: zod.number().min(1, "O número é obrigatório"),
+   neighborhood: zod.string().min(3, "Informe o bairro"),
+   city: zod.string().min(3, "O nome da cidade é obrigatório"),
+   uf: zod.string().length(2, "A sigla do estado deve ter 2 caracteres")
+})
+
+interface NewDeliveryAddressFormData{
+   cep: number
+   street: string
+   number: number
+   complement: string
+   neighborhood: string
+   city: string
+   uf: string
+}
 
 export function Checkout(){
    const { coffeeOrderList, handleRemoveCoffeFromOrder } = useContext(CoffeeOrderContext)
@@ -22,17 +43,27 @@ export function Checkout(){
 
    const finalTotalPrice = totalOrderPrice + deliveryPrice
 
-   const { register, handleSubmit, watch } = useForm()
-
-   function handleCreateNewAddress(data: any){
-      console.log(data)
-   }
+   const { register, handleSubmit, watch, formState: {errors} } = useForm({
+      resolver: zodResolver(newDeliveryFormValidationSchema)
+   })
 
    const formInformations = watch([
       "cep", "street", "number", "complement", "neighborhood", "city", "uf"
    ])
 
    const isSubmitDisabled = !formInformations.every(formInformations => formInformations)
+
+   function handleCreateNewAddress(data: NewDeliveryAddressFormData){
+      console.log(data)
+   }
+
+   function onError(){
+      const firstError = Object.values(errors)[0]
+
+      if(firstError){
+         alert(firstError.message)
+      }
+   }
 
    useEffect(() => {
       const total = coffeeOrderList.reduce((total, coffee) => {
@@ -44,7 +75,7 @@ export function Checkout(){
 
    return(
       <CheckoutContainer>
-         <form onSubmit={handleSubmit(handleCreateNewAddress)} action="">
+         <form onSubmit={handleSubmit(handleCreateNewAddress, onError)} action="">
             <label>Complete seu pedido</label>
 
             <div className="finish-order">
@@ -59,7 +90,7 @@ export function Checkout(){
                      <Input
                      type="number"
                      placeholder="CEP"
-                     {...register('cep')}
+                     {...register('cep', {valueAsNumber: true})}
                      />
 
                      <Input
@@ -72,7 +103,7 @@ export function Checkout(){
                         <Input
                         type="number"
                         placeholder="Número"
-                        {...register('number')}
+                        {...register('number', {valueAsNumber: true})}
                         />
 
                         <Input
@@ -165,11 +196,9 @@ export function Checkout(){
                   </div>
                </div>
 
-               <NavLink to="/delivery" title="delivery">
-                  <ConfirmButton type="submit" disabled={isSubmitDisabled}>
-                     Confirmar pedido
-                  </ConfirmButton>
-               </NavLink>
+               <ConfirmButton type="submit" disabled={isSubmitDisabled}>
+                  Confirmar pedido
+               </ConfirmButton>
             </CoffeeOrderContainer>
          </form>
       </CheckoutContainer>
