@@ -14,8 +14,21 @@ export interface CoffeeDataProps{
    description: string
 }
 
+export interface NewDeliveryFormData{
+   cep: number
+   street: string
+   number: number
+   complement?: string
+   neighborhood: string
+   city: string
+   uf: string
+   paymentMethod: string
+}
+
 interface CoffeeOrderContextData{
    coffeeOrderList: CoffeeDataProps[]
+   deliveryInfo: NewDeliveryFormData | null
+   setDeliveryInfo: (info: NewDeliveryFormData) => void
    handleAddNewCoffeeToOrder: (newCoffee: CoffeeDataProps) => void
    handleRemoveCoffeFromOrder: (coffeToRemove: CoffeeDataProps) => void
    updateTotalOrderPrice: (coffeeId: number, newQuantity: number) => void
@@ -28,6 +41,8 @@ interface CoffeeOrderProviderProps{
 }
 
 export function CoffeeOrderContextProvider({ children }:CoffeeOrderProviderProps){
+   const [deliveryInfo, setDeliveryInfo] = useState<NewDeliveryFormData | null>(null)
+   
    const [coffeeOrderList, setCoffeeOrderList] = useState<CoffeeDataProps[]>([])
 
    function handleAddNewCoffeeToOrder(newCoffee: CoffeeDataProps){    
@@ -69,6 +84,8 @@ export function CoffeeOrderContextProvider({ children }:CoffeeOrderProviderProps
       <CoffeeOrderContext.Provider
       value={{
          coffeeOrderList,
+         deliveryInfo,
+         setDeliveryInfo,
          handleAddNewCoffeeToOrder,
          handleRemoveCoffeFromOrder,
          updateTotalOrderPrice

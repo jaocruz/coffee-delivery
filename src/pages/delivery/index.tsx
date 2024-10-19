@@ -3,9 +3,16 @@ import { DeliveryContainer, OrderInfo } from "./styles";
 
 import illustration from "/delivery-illustration.svg"
 
+import { useContext } from "react";
+import { CoffeeOrderContext } from "../../contexts/orderContext";
+
 export function Delivery(){
+   const { deliveryInfo } = useContext(CoffeeOrderContext)
+
    return(
       <DeliveryContainer>
+         <button onClick={() => console.log(deliveryInfo)}>INFOS</button>
+
          <div className="main-text">
             <h1>Uhu! Pedido confirmado</h1>
             <h2>Agora é só aguardar que logo o café chegará até você</h2>

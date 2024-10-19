@@ -7,13 +7,14 @@ import { PaymentButton } from "./components/paymentButton";
 import { OrderCoffeeCard } from "./components/orderCoffeeCard";
 
 import { useContext, useEffect, useState } from "react";
-import { CoffeeOrderContext } from "../../contexts/orderContext";
+import { CoffeeOrderContext, NewDeliveryFormData } from "../../contexts/orderContext";
 
 import { useForm } from "react-hook-form"
 
 import * as zod from "zod"
 
 import { zodResolver } from "@hookform/resolvers/zod"
+import { useNavigate } from "react-router-dom";
 
 const newDeliveryFormValidationSchema = zod.object({
    cep: zod.number().min(10000000, "Informe um CEP válido").max(99999999, "Informe um CEP válido"),
@@ -24,17 +25,11 @@ const newDeliveryFormValidationSchema = zod.object({
    uf: zod.string().length(2, "A sigla do estado deve ter 2 caracteres")
 })
 
-interface NewDeliveryAddressFormData{
-   cep: number
-   street: string
-   number: number
-   complement: string
-   neighborhood: string
-   city: string
-   uf: string
-}
-
 export function Checkout(){
+   const { setDeliveryInfo } = useContext(CoffeeOrderContext)
+
+   const navigate = useNavigate()
+
    const { coffeeOrderList, handleRemoveCoffeFromOrder } = useContext(CoffeeOrderContext)
    
    const [totalOrderPrice, setTotalOrderPrice] = useState(0)
@@ -43,7 +38,7 @@ export function Checkout(){
 
    const finalTotalPrice = totalOrderPrice + deliveryPrice
 
-   const { register, handleSubmit, watch, formState: {errors} } = useForm({
+   const { register, handleSubmit, watch } = useForm<NewDeliveryFormData>({
       resolver: zodResolver(newDeliveryFormValidationSchema)
    })
 
@@ -53,16 +48,11 @@ export function Checkout(){
 
    const isSubmitDisabled = !formInformations.every(formInformations => formInformations)
 
-   function handleCreateNewAddress(data: NewDeliveryAddressFormData){
-      console.log(data)
-   }
+   const [paymentMethod, setPaymentMethod] = useState('')
 
-   function onError(){
-      const firstError = Object.values(errors)[0]
-
-      if(firstError){
-         alert(firstError.message)
-      }
+   function handleCreateNewAddress(data: NewDeliveryFormData){
+      setDeliveryInfo({...data, paymentMethod})
+      navigate('/delivery')
    }
 
    useEffect(() => {
@@ -75,7 +65,7 @@ export function Checkout(){
 
    return(
       <CheckoutContainer>
-         <form onSubmit={handleSubmit(handleCreateNewAddress, onError)} action="">
+         <form onSubmit={handleSubmit(handleCreateNewAddress)} action="">
             <label>Complete seu pedido</label>
 
             <div className="finish-order">
@@ -146,16 +136,19 @@ export function Checkout(){
                      <PaymentButton
                      icon={<CreditCard />}
                      name="Cartão de crédito"
+                     onClick={() => setPaymentMethod("Cartão de crédito")}
                      />
 
                      <PaymentButton
                      icon={<Bank />}
                      name="Cartão de débito"
+                     onClick={() => setPaymentMethod("Cartão de débito")}
                      />
 
                      <PaymentButton
                      icon={<Money />}
                      name="Dinheiro"
+                     onClick={() => setPaymentMethod("Dinheiro")}
                      />
                   </div>
                </BaseContainer>
