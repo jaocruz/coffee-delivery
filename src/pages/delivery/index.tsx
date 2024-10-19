@@ -11,8 +11,6 @@ export function Delivery(){
 
    return(
       <DeliveryContainer>
-         <button onClick={() => console.log(deliveryInfo)}>INFOS</button>
-
          <div className="main-text">
             <h1>Uhu! Pedido confirmado</h1>
             <h2>Agora é só aguardar que logo o café chegará até você</h2>
@@ -24,8 +22,8 @@ export function Delivery(){
                   <MapPin weight="fill" size={16}/>
                </h1>
 
-               <span>Entrega em <strong>Rua João Daniel Martinelli, 102</strong> </span>
-               <span>Farrapos - Porto Alegre, RS</span>
+               <span>Entrega em <strong>Rua {deliveryInfo?.street}, {deliveryInfo?.number} {deliveryInfo?.complement}</strong> </span>
+               <span>{deliveryInfo?.neighborhood} - {deliveryInfo?.city}, {deliveryInfo?.uf}</span>
             </div>
 
             <div className="item">
@@ -43,7 +41,7 @@ export function Delivery(){
                </h1>
 
                <span>Pagamento na entrega</span>
-               <strong>Cartão de Crédito</strong>
+               <strong>{deliveryInfo?.paymentMethod}</strong>
             </div>
          </OrderInfo>
          

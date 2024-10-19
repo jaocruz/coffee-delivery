@@ -20,6 +20,7 @@ const newDeliveryFormValidationSchema = zod.object({
    cep: zod.number().min(10000000, "Informe um CEP válido").max(99999999, "Informe um CEP válido"),
    street: zod.string().min(3, "O nome da rua é obrigatório"),
    number: zod.number().min(1, "O número é obrigatório"),
+   complement: zod.string(),
    neighborhood: zod.string().min(3, "Informe o bairro"),
    city: zod.string().min(3, "O nome da cidade é obrigatório"),
    uf: zod.string().length(2, "A sigla do estado deve ter 2 caracteres")
@@ -43,7 +44,7 @@ export function Checkout(){
    })
 
    const formInformations = watch([
-      "cep", "street", "number", "complement", "neighborhood", "city", "uf"
+      "cep", "street", "number", "neighborhood", "city", "uf"
    ])
 
    const isSubmitDisabled = !formInformations.every(formInformations => formInformations)
