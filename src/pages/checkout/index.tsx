@@ -27,11 +27,9 @@ const newDeliveryFormValidationSchema = zod.object({
 })
 
 export function Checkout(){
-   const { setDeliveryInfo } = useContext(CoffeeOrderContext)
-
+   const { coffeeOrderList, setCoffeeOrderList, setDeliveryInfo, handleRemoveCoffeFromOrder } = useContext(CoffeeOrderContext)
+   
    const navigate = useNavigate()
-
-   const { coffeeOrderList, handleRemoveCoffeFromOrder } = useContext(CoffeeOrderContext)
    
    const [totalOrderPrice, setTotalOrderPrice] = useState(0)
 
@@ -47,12 +45,13 @@ export function Checkout(){
       "cep", "street", "number", "neighborhood", "city", "uf"
    ])
 
-   const isSubmitDisabled = !formInformations.every(formInformations => formInformations)
-
    const [paymentMethod, setPaymentMethod] = useState('')
+   
+   const isSubmitDisabled = !formInformations.every(formInformations => formInformations) || coffeeOrderList.length === 0 || !paymentMethod
 
    function handleCreateNewAddress(data: NewDeliveryFormData){
       setDeliveryInfo({...data, paymentMethod})
+      setCoffeeOrderList([])
       navigate('/delivery')
    }
 
@@ -137,18 +136,21 @@ export function Checkout(){
                      <PaymentButton
                      icon={<CreditCard />}
                      name="Cartão de crédito"
+                     isActive={paymentMethod === "Cartão de crédito"}
                      onClick={() => setPaymentMethod("Cartão de crédito")}
                      />
 
                      <PaymentButton
                      icon={<Bank />}
                      name="Cartão de débito"
+                     isActive={paymentMethod === "Cartão de débito"}
                      onClick={() => setPaymentMethod("Cartão de débito")}
                      />
 
                      <PaymentButton
                      icon={<Money />}
                      name="Dinheiro"
+                     isActive={paymentMethod === "Dinheiro"}
                      onClick={() => setPaymentMethod("Dinheiro")}
                      />
                   </div>

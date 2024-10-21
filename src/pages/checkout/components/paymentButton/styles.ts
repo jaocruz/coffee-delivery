@@ -1,6 +1,10 @@
 import styled from "styled-components"
 
-export const PaymentButtonContainer = styled.button`
+interface PaymentButtonProps {
+   isActive: boolean
+}
+
+export const PaymentButtonContainer = styled.button<PaymentButtonProps>`
    display: flex;
    align-items: center;
 
@@ -14,10 +18,13 @@ export const PaymentButtonContainer = styled.button`
 
    transition: background 0.15s ease-in-out;
 
-   background: ${porps => porps.theme["base-button"]};
+   background: ${props => props.theme["base-button"]};
+
+   outline: ${({ isActive, theme }) => isActive ? `1px solid ${theme.purple}` : 'none'};
+   background: ${({ isActive, theme }) => isActive ? theme["purple-light"] : theme["base-button"]};
 
    svg{
-      color: ${porps => porps.theme.purple};
+      color: ${props => props.theme.purple};
    }
 
    span{
@@ -25,15 +32,10 @@ export const PaymentButtonContainer = styled.button`
       font-weight: 400;
       line-height: 160%;
       text-transform: uppercase;
-      color: ${porps => porps.theme["base-text"]};
+      color: ${props => props.theme["base-text"]};
    }
 
    &:hover{
-      background: ${porps => porps.theme["base-hover"]};
-   }
-
-   &:focus{
-      background: ${porps => porps.theme["purple-light"]};
-      outline: 1px solid ${porps => porps.theme.purple};
+      background: ${props => props.theme["base-hover"]};
    }
 `

@@ -29,6 +29,7 @@ interface CoffeeOrderContextData{
    coffeeOrderList: CoffeeDataProps[]
    deliveryInfo: NewDeliveryFormData | null
    setDeliveryInfo: (info: NewDeliveryFormData) => void
+   setCoffeeOrderList: React.Dispatch<React.SetStateAction<CoffeeDataProps[]>>
    handleAddNewCoffeeToOrder: (newCoffee: CoffeeDataProps) => void
    handleRemoveCoffeFromOrder: (coffeToRemove: CoffeeDataProps) => void
    updateTotalOrderPrice: (coffeeId: number, newQuantity: number) => void
@@ -86,6 +87,7 @@ export function CoffeeOrderContextProvider({ children }:CoffeeOrderProviderProps
          coffeeOrderList,
          deliveryInfo,
          setDeliveryInfo,
+         setCoffeeOrderList,
          handleAddNewCoffeeToOrder,
          handleRemoveCoffeFromOrder,
          updateTotalOrderPrice
